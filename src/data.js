@@ -4,15 +4,14 @@ import { jwtDecode } from "jwt-decode";
 
 const cookie = new Cookies();
 
-export const isNotAuthentication = ()=> {
+export const isAuthentication = ()=> {
     if (JSON.parse(localStorage.getItem("%&a%g$r$£%z7%&")!==null) && cookie.get("a%@&dr$o#%$u%")) {
-        const decoded = jwtDecode(JSON.parse(localStorage.getItem("%&a%g$r$£%z7%&")));
-        const current_user = jwtDecode(cookie.get("a%@&dr$o#%$u%")); 
-        if (decoded.email!==current_user.email)
+        const decodeCookie = jwtDecode(cookie.get("a%@&dr$o#%$u%"));
+        const decodeLocal = jwtDecode(JSON.parse(localStorage.getItem("%&a%g$r$£%z7%&")));
+        if (decodeCookie.email===decodeLocal.email)
             return true;
-        return false;
     }
-    else return true;
+    return false;
 }
 
 export const authentication = async (email, password)=> {

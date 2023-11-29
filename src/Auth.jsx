@@ -2,9 +2,7 @@ import { Box, FormControl, InputLabel, Input, Button } from "@mui/material";
 import { useContext } from "react";
 import { userProfilContext } from "./UserContext";
 import { useNavigate } from "react-router-dom";
-import { authentication } from "./data";
-import { jwtDecode } from "jwt-decode";
-import Cookies from "universal-cookie";
+import { authentication, isAuthentication } from "./data";
 
 
 export const Auth = ()=> {
@@ -15,18 +13,13 @@ export const Auth = ()=> {
         setUserProfilContext
     } = value;
     const navigate = useNavigate();
-    const isAuthentication = ()=> {
+    const Autorization = ()=> {
         const promise = authentication(email, password);
         const login = async ()=> {
             const data = await promise;
-            const cookie = new Cookies();
-            if (JSON.parse(localStorage.getItem("%&a%g$r$£%z7%&")!==null) && data && cookie.get("a%@&dr$o#%$u%")) {
-                const decodeCookie = jwtDecode(cookie.get("a%@&dr$o#%$u%"));
-                const decodeData = jwtDecode(JSON.parse(localStorage.getItem("%&a%g$r$£%z7%&")));
-                if (decodeCookie.email===decodeData.email)
-                    navigate("/home");
-            }
-        }
+            if (data) 
+                if (isAuthentication()) navigate("/");
+        };
         login();
     }
     return (
@@ -61,7 +54,7 @@ export const Auth = ()=> {
             />
         </FormControl>
         <Button variant="contained"
-            onClick={()=> isAuthentication()}
+            onClick={()=> Autorization()}
         >
             Login
         </Button>

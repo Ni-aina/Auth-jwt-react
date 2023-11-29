@@ -1,7 +1,6 @@
 import React, { createContext, useState } from "react";
 
 export const userProfilContext = createContext({
-    username: "",
     email: "",
     password: "",
     setUserProfilContext: () => {}
@@ -9,7 +8,6 @@ export const userProfilContext = createContext({
 
 const UserProfilContextProvider = ({children}) => {
     const userProfilState = {
-        username: "",
         email: "",
         password: "",
         setUserProfilContext: info =>

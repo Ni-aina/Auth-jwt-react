@@ -1,6 +1,6 @@
 import { Box } from "@mui/material";
 
-export const Home = ()=> {
+export const Admin = ()=> {
 
     return (
         <Box sx={{
@@ -8,7 +8,7 @@ export const Home = ()=> {
                 width: 500
             }}
         >
-            Welcome to the Auth page
+            Welcome to Admin BO
         </Box>
     );
 }
