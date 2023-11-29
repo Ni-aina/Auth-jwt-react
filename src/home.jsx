@@ -17,7 +17,7 @@ export const Home = ()=> {
                 height: 300,
                 width: 500
             }}>
-                    Update profil
+                    Upload an Image
             </Button>
         </Link>
     </Box>

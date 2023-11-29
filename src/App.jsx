@@ -5,7 +5,7 @@ import { Auth } from "./auth";
 import { Home } from "./home";
 import { Admin } from "./admin";
 import { Register } from "./Register";
-import { EditUser } from "./UserUpdate";
+import { ImageUpload } from "./ImageUpload";
 import DrawerAppBar from "./Navbar";
 
 const App = ()=> {
@@ -17,7 +17,7 @@ const App = ()=> {
         <Routes>
             <Route path="/login" element={<Auth />} />
             <Route element={<PrivateRoutes />}>
-              <Route element={<EditUser /> } path="/" exact/>
+              <Route element={<ImageUpload /> } path="/" exact/>
               <Route element={<Home />} path="/home" />
               <Route element={<Admin />} path="/admin" />
             </Route>
