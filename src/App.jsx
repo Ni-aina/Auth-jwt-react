@@ -1,21 +1,27 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { CssBaseline } from "@mui/material";
 import { PrivateRoutes } from "./PrivateRoutes";
-import { Auth } from "./Auth";
-import { Home } from "./Home";
-import { Admin } from "./Admin";
+import { Auth } from "./auth";
+import { Home } from "./home";
+import { Admin } from "./admin";
+import { Register } from "./Register";
+import { EditUser } from "./UserUpdate";
+import DrawerAppBar from "./Navbar";
 
 const App = ()=> {
   return(
     <>
       <CssBaseline />
       <BrowserRouter>
+        <DrawerAppBar />
         <Routes>
             <Route path="/login" element={<Auth />} />
             <Route element={<PrivateRoutes />}>
-              <Route element={<Home />} path="/" exact/>
+              <Route element={<EditUser /> } path="/" exact/>
+              <Route element={<Home />} path="/home" />
               <Route element={<Admin />} path="/admin" />
             </Route>
+            <Route element={<Register />} path="/register" />
         </Routes>
       </BrowserRouter>
     </>

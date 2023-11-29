@@ -1,14 +1,25 @@
-import { Box } from "@mui/material";
+import { Box, Button } from "@mui/material";
+import { Link } from "react-router-dom";
 
 export const Home = ()=> {
 
     return (
         <Box sx={{
-                margin: "200px auto",
+            margin: "100px auto",
+            width: 500
+        }}
+    >
+        <Link to="/" style={{
+          textDecoration: "none",
+          color: "#fff"
+        }}>
+            <Button variant="contained" sx={{
+                height: 300,
                 width: 500
-            }}
-        >
-            Welcome to the Auth page
-        </Box>
+            }}>
+                    Update profil
+            </Button>
+        </Link>
+    </Box>
     );
 }

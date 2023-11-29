@@ -1,29 +1,22 @@
+import React, { useState } from "react";
 import { Box, FormControl, InputLabel, Input, Button } from "@mui/material";
-import { useContext } from "react";
-import { userProfilContext } from "./userContext";
+import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { authentication, isAuthentication } from "./data";
 
-
-export const Auth = ()=> {
-    const value = useContext(userProfilContext);
-    const {
-        email,
-        password,
-        setUserProfilContext
-    } = value;
+export const Register = ()=> {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
     const navigate = useNavigate();
-    const Autorization = ()=> {
-        const promise = authentication(email, password);
-        const login = async ()=> {
-            const data = await promise;
-            if (data) 
-                if (isAuthentication()) {
-                    navigate("/");
-                    window.location.reload();
-                }
-        };
-        login();
+    const register = ()=> {
+        axios.post('https://127.0.0.1:8000/api/register', {
+        email: email,
+        password: password
+        }).then(res => { 
+            navigate("/");
+            window.location.reload();
+        }).catch(() => {
+            return false;
+        });
     }
     return (
         <Box sx={{
@@ -40,7 +33,7 @@ export const Auth = ()=> {
                 id="email"
                 type="email"
                 name="email"
-                onChange={ e => setUserProfilContext({[e.target.name]: e.target.value})}
+                onChange={(e)=> setEmail(e.target.value)}
             />
         </FormControl>
         <FormControl
@@ -53,13 +46,11 @@ export const Auth = ()=> {
                 id="password"
                 type="password"
                 name="password"
-                onChange={ e => setUserProfilContext({[e.target.name]: e.target.value})}
+                onChange={(e)=> setPassword(e.target.value)}
             />
         </FormControl>
-        <Button variant="contained"
-            onClick={()=> Autorization()}
-        >
-            Login
+        <Button variant="contained" onClick={()=> register()}>
+            Register
         </Button>
         </Box>
     );
