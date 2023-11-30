@@ -6,7 +6,7 @@ export const Register = ()=> {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const register = ()=> {
-        axios.post('https://127.0.0.1:8000/api/register', {
+        axios.post(`${process.env.REACT_APP_API_URL}/api/register`, {
         email: email,
         password: password
         }).then(res => { 

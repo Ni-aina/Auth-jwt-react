@@ -15,7 +15,7 @@ export const isAuthentication = ()=> {
 }
 
 export const authentication = async (email, password)=> {
-    const isAuthentication = await Axios.post('https://localhost:8000/api/login_check', {
+    const isAuthentication = await Axios.post(`${process.env.REACT_APP_API_URL}/api/login_check`, {
         email: email,
         password: password
     }).then(res => { 
