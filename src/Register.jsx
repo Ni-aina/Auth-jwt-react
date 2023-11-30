@@ -1,15 +1,20 @@
-import React, { useState } from "react";
+import React from "react";
 import { Box, FormControl, InputLabel, Input, Button } from "@mui/material";
 import axios from "axios";
+import { useForm } from "react-hook-form";
+import { DevTool } from "@hookform/devtools";
+import { useNavigate } from "react-router-dom";
 
 export const Register = ()=> {
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
-    const register = ()=> {
+    const form = useForm();
+    const navigate = useNavigate();
+    const { register, control, handleSubmit } = form;
+    const saveData = (data)=> {
         axios.post(`${process.env.REACT_APP_API_URL}/api/register`, {
-        email: email,
-        password: password
+        email: data.email,
+        password: data.password
         }).then(res => { 
+            navigate("/");
             return res.data;
         }).catch(() => {
             return false;
@@ -20,7 +25,7 @@ export const Register = ()=> {
         margin: "150px auto",
         width: 500
         }}>
-            <form action="/" onSubmit={register}>
+            <form onSubmit={handleSubmit(saveData)}>
                 <FormControl
                     fullWidth
                     variant="standard"
@@ -28,10 +33,7 @@ export const Register = ()=> {
                 >
                     <InputLabel htmlFor="email">Email</InputLabel>
                     <Input
-                        id="email"
-                        type="email"
-                        name="email"
-                        onChange={(e)=> setEmail(e.target.value)}
+                        {...register("email")}
                         required
                     />
                 </FormControl>
@@ -42,10 +44,8 @@ export const Register = ()=> {
                 >
                     <InputLabel htmlFor="password">Password</InputLabel>
                     <Input
-                        id="password"
+                        {...register("password")}
                         type="password"
-                        name="password"
-                        onChange={(e)=> setPassword(e.target.value)}
                         required
                     />
                 </FormControl>
@@ -53,6 +53,7 @@ export const Register = ()=> {
                     Register
                 </Button>
             </form>
+            <DevTool control={control}/>
         </Box>
     );
 }
